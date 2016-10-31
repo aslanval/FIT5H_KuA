@@ -22,13 +22,23 @@ Manipulieren von Dateien/Verzeichnissen
 		legt im aktuellen Verzeichnis eine neue Datei an
 
 	less <dateiname>
-		zeigt den Inhal der Datei an
+		zeigt den Inhalt der Datei an
 
-	mkdir <ordnername>
-		legt ein neues Verzeichnis an
+	mkdir <verzeichnis>
+		legt ein neues Verzeichnis/Ordner an
 
 	cp <quelle> <ziel>
+		cd <verzeichnis/dateiname1> <verzeichnis/dateiname2>
 		Kopiert eine Datei von quelle und fügt es in Ziel ein
 
 	cp -r <quelle> <ziel>
 		Kopiert ein Ordner von quelle und fügt es in Ziel ein
+
+	rm <dateiname>
+		Löscht die Datei
+
+	rm -r <verzeichnis>
+		Löscht das verzeichnis
+
+	mv <dateiname> <dateiname2>
+		Wird verwendet um eine Datei umzubennen oder zu verschieben
