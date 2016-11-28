@@ -1,5 +1,7 @@
 #!/bin/bash
 read -p "Geben Sie die 1. Zahl ein: " eins
+if [[ $eins 
+
 read -p "Geben Sie die 2. Zahl ein: " zwei
 ergebnis1=$((eins+zwei))
 echo "1.Zwischenergebnis lautet: " $ergebnis1
