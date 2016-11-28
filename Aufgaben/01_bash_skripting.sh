@@ -1,15 +1,26 @@
 #!/bin/bash
-read -p "Ihre Eingabe: " var_name	#durch read-p startet eine Eingabeaufforderung, das eingegebene wird in var_name übergeben
-echo "Der Parameter lautet: $1"		#das was nach dem Befehl als Dateinamen angegeben wird in der Console, wird in $1 geschoben
-
-if [[ -e $1 ]]
-then
-	if [[ $var_name = $1 ]]
+if [[ $1 ]]
 	then
-		echo "Die Eingabe $var_name stimmt mit dem Parameter: $1 überein"
-	else
-		echo "Die Eingabe $var_name stimmt nicht mit dem Parameter: $1 überein"
-	fi	
+	abfrage=$1
 else
-	echo "Die Datei $1 ist nicht vorhanden!"
-fi 
+	#read -p "Ihre Eingabe: " abfrage 		#durch read-p startet eine Eingabeaufforderung, das eingegebene wird in var_name übergeben
+	abfrage=''
+	#while [[ $abfrage != 'q' ]] && [[ ! -e $abfrage ]]
+	until [[ $abfrage = 'q' ]] || [[ -e $abfrage ]]
+	do
+		read -p "Ihre Eingabe: " abfrage
+		echo "Die Eingabe lautet: $abfrage"
+	done
+fi
+
+
+if [[ -e $abfrage ]]
+then
+	echo "Der Eintrag ist vorhanden: $abfrage"
+else
+	echo "Die Datei ist nicht vorhanden!"
+fi
+
+#Erstellen Sie ein Skript, das einen Parameter entgegennimmt und checkt ob es eine Datei gibt, die so heißt wie der übergebene Parameter.
+#Aufruf: ./test.sh test.txt
+#Erweiterung: Die Eingabeaufforderung soll solange gezeigt werden, bis der Benutzer ein q eingibt, oder einen vorhandenen Dateinamen.

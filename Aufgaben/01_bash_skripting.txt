@@ -1,3 +1,5 @@
+1.
 Erstellen Sie ein Skript, dass einen Parameter entgegennimmt und checkt ob es eine Datei gibt, die so heißt wie der übergebene Parameter.
 Aufruf: ./test.sh test.txt
+
 Erweiterung: Die Eingábeaufforderung soll solange gezeigt werden, bis der Benutzer ein q eingibt oder einen vorhandenen Dateinamen.

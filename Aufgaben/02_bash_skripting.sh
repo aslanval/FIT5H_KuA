@@ -1,15 +1,25 @@
 #!/bin/bash
-read -p "Ihre Eingabe: " var_name	#durch read-p startet eine Eingabeaufforderung, das eingegebene wird in var_name übergeben
-echo "Der Parameter lautet: $1"		#das was nach dem Befehl als Dateinamen angegeben wird in der Console, wird in $1 geschoben
+read -p "Geben Sie die 1. Zahl ein: " eins
+read -p "Geben Sie die 2. Zahl ein: " zwei
+ergebnis1=$((eins+zwei))
+echo "1.Zwischenergebnis lautet: " $ergebnis1
 
-if [[ -e $1 ]]
-then
-	if [[ $var_name = $1 ]]
-	then
-		echo "Die Eingabe $var_name stimmt mit dem Parameter: $1 überein"
+weitere=''
+n=1
+
+until [[ $weitere = 'exit' ]]
+do
+	read -p "Weitere Zahl hinzuaddieren oder mit exit beenden: " weitere
+	ergebnis1=$((ergebnis1+weitere))
+
+	if [[ $weitere = 'exit' ]]
+		then
+		n=$n
+		echo "Endergebnis: "$ergebnis1" Das Programm wurde beendet."
 	else
-		echo "Die Eingabe $var_name stimmt nicht mit dem Parameter: $1 überein"
-	fi	
-else
-	echo "Die Datei $1 ist nicht vorhanden!"
-fi 
+		n=$((n+1))
+		echo "Bisher wurden "$n" Zahlen eigegeben. Das Zwischenergebnis lautet: "$ergebnis1
+	fi
+done
+
+# eine Variable benoetigt kein $, wenn diese neu definiert oder veraendert wird.
