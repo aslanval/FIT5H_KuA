@@ -1,5 +1,5 @@
 #!/bin/bash
-
+ 
 if [[ $1 ]]
 	then
 	datum=$(date)
@@ -9,19 +9,23 @@ if [[ $1 ]]
 	if [[ -e $topic ]]
 		then
 		cd $topic/
-		if [[ -e "notes.txt" ]]
-			then
-			echo $datum >> notes.txt
-			echo $notiz >> notes.txt
-		else
-			touch "notes.txt"
-			echo $datum >> notes.txt
-			echo $notiz >> notes.txt
-		fi
+		echo $datum >> notes.txt	# Z.12 & Z.13 ersetzen das dadrunter
+		echo $notiz >> notes.txt	#
+#		if [[ -e "notes.txt" ]]
+#			then
+#			echo $datum >> notes.txt
+#			echo $notiz >> notes.txt
+#		else
+#			touch "notes.txt"
+#			echo $datum >> notes.txt
+#			echo $notiz >> notes.txt
+#		fi
 	else
 		mkdir $topic
 		cd $topic/
-		touch "notes.txt"
+#		touch "notes.txt"			#Ordner muss wegen Z.27&28 nicht erstellt werden.
+		echo $datum >> notes.txt
+		echo $notiz >> notes.txt
 	fi
 else
 	echo "Sie haben keinen Ziel-Ordner angegeben."

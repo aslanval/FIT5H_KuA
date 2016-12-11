@@ -2,5 +2,5 @@
 Speichern Sie das Datum in einer Variable date.
 Speichern Speichern sie den ersten Parameter nach der Eingabeaufforderung in die Variable topic.
 Erzeugen Sie einen Dateinamen, nach dem folgenden Muster: /home/theo/<parameter>notes.txt
-Nutzen Sie die Variable topic und die sytemimmanente Variable für das Home-Verzeichnis des aktuellen Users.
+Nutzen Sie die Variable topic und die systemimmanente Variable für das Home-Verzeichnis des aktuellen Users.
 Erzeugen Sie die Eingabeaufforderung: "Notiz:" und soeuchern Sie die Eingabe des users in der Datei mit Datumsangabe.
