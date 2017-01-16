@@ -9,5 +9,5 @@ else
 	dir="$HOME/$topic"					#Verzeichnis vom Ordner(topic/$1)
 	file="$dir/notes.txt"				#Verzeichnis von der notes.txt
 	mkdir -p $dir						#Erstelle den Ordner, falls noch nicht existiert
-	printf "$datum: $notiz \n" >> $file #Erstelle die Datei und füge hinzu oder füge hinzu wnen schon existiert
+	printf "$datum: $notiz \n" >> $file #Erstelle die Datei und füge hinzu oder füge hinzu wenn schon existiert
 fi
