@@ -1,0 +1,27 @@
+Berbindung über Netzwerkadapter
+	ifconfig
+
+
+	Einstellungen des Netzwerkadapters in:
+		/etc/network/interfaces
+			auto eth0			#nimmt der ersten Netzwerkadapter und weißt diesen eth0 zu
+			iface eth0 dhcp		#soll vom dhcp server die ipadresse nehmen
+
+			auto eth1
+			iface eth1 inet static		#ipadresse wird manuell vergeben
+				adress 172.16.161.91
+				netmask	255.255.0.0
+				gateway 172.16.1.253	#muss nicht angegeben werden
+				dns-nameservers 172.16.1.201	#muss nicht angegeben werden
+
+	Aktuelle Konfiguration übernehmen:
+		sudo service networking restart
+		#oder -> ansonsten geht immer:
+		sudo ifdown eth0
+		sudo ifup eth0
+
+DNS - Gateway
+	/etc/resolv.conf
+		nameserver 172.16.1.201
+	/etc/hosts	#für die DNS-Auflösung schaut das System erst in die Datei nach ob der FQDN zu eienr IP zugeordnet werden kann, anschließen fragt er den DNS Server
+		172.16.161.66 r11.schuelerpc.local

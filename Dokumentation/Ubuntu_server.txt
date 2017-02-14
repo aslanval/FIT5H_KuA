@@ -1,0 +1,7 @@
+Ubuntu_server
+
+1) sudo apt-get install vim
+2) sudo apt-get install openssh -server
+
+netzwerk ändern:
+sudo vim /etc/network/interfaces
