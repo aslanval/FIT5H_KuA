@@ -29,7 +29,7 @@ Login mit Key von Rechner:
 Anpassen der Konfigurationsdatei von SSH auf dem Server
 	vim /etc/ssh/sshd_config
 	port 3333
-	PermitRootLogin no 			#root kann von außen genrell nicht zugreifen
+	PermitRootLogin no 			#root kann von außen generell nicht zugreifen
 	PasswordAuthentication no	#erlaubt nur noch Rechnern den Login
 
 Kopieren von Dateien

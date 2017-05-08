@@ -1,0 +1,17 @@
+1) sudo apt-get install git
+2) sudo useradd -m -d /var/git -s /bin/bash -c 'Git' git
+	sudo passwd git
+3) less .ssh/authorized_keys #zeigt die keys an ggf einen erstellen
+4) su git
+5) cd /var/git/
+6) mkdir new_app
+7) cd new_app
+8) git --bare init
+9) ls -l
+
+1) git init
+git add . -A
+git remote add origin git@172.16.161.143:/var/git/new_app
+2) git commit -am 'Initial Import'
+3) 
+4) git push origin master

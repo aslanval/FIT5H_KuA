@@ -1,0 +1,45 @@
+1) sudo vim /etc/network/interfaces
+	normal:
+		auto ens33
+		iface ens33 inet dhcp
+	ändern zu:
+		auto ens33
+		#iface ens33 inet dhcp
+		iface ens33 inet static
+		address 172.16.161.143
+		netmask	255.255.0.0
+		gateway 172.16.1.253	#muss nicht da sein
+		dns-nameservers 172.16.1.201	#dito
+2) sudo apt-get update		#aktuelles update verzeichnis
+3) sudo apt-get install vim		#vim editor installieren
+4) sudo apt-get install openssh -server		#um vom client drauf zuzugreifen
+	ssh aslan@172.16.161.143 klappt jetzt
+5) sudo apt-get install apache2		#webserver installation
+6) sudo apt-get install lynx		#browser installieren
+7) sudo apt-get install libapache2-mod-php		#php-modul installieren
+	sudo a2enmod php7.0 #zum starten
+8) sudo hostname -b servername.local #auf server
+9) sudo nano /etc/hosts
+	172.16.161.143 u-s-aslan.local	# auf server
+10) sudo nano /etc/hosts
+	172.16.161.143 u-s-aslan.local	# auf client
+11) sudo mkdir /var/www/html/sommer
+12) sudo touch /var/www/html/sommer/index.php
+13) sudo chown -R www-data:www-data sommer
+14)
+	cd /etc/apache2/sites-available
+	sudo vim sommer.conf
+		<VirtualHost *:80>
+			ServerName sommer.servername.local
+			DocumentRoot /var/www/html/sommer
+		</VirtualHost>
+15) sudo a2ensite sommer
+16) sudo service apache2 reload
+17) sudo nano /etc/hosts
+	172.16.161.143 sommer.u-s-aslan.local	# auf client
+18) http://sommer.servername.local
+
+winter:
+19) sudo nano /etc/hosts
+	172.16.161.143  winter.u-s-aslan.local	# auf client
+20) gleiche schritte...

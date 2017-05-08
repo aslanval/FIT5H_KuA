@@ -5,7 +5,7 @@ Definition Webserver:
 	- lauscht standardmäßig auf Port 80
 	- Verschlüsslung über https Protokoll möglic, wird auf Port 443 erwartet
 	- Apache, Nginx, Internet Information Service (IIS)
-
+ 
 Installation
 	sudo apt-get update
 	sudo apt-get install apache2

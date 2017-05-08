@@ -1,0 +1,142 @@
+Datenbanken Allgemein:
+	Historisch:
+		Es geht darum große Mengen an Daten effizient zu verwalten.
+		Konzept enstand zwischen 1960 und 1970
+		IBM-Mitarbeiter E.F.Codd
+
+		Datenbankmanagementsystem (DBMS)
+			Verwaltung der Daten geschieht mit einer Datenbanksprache
+			ANSI-sql ist die Obermenge, aus der heraus jedes Datenbanksystem eine Erweiterung der Sprache mit zusätzlichen Elementne und Features zur Verfügung stellt.
+			(Mssql: Transacit-Sql, Oracle: plsql)
+				- Datenabfrage und Datenmanipulation (DML)
+				- Verwaltung der Datenbank und Definition der Datenstruktur (DDL)
+				- Berechtigungssteuerung (DCL)
+
+	Datenbanken
+		Feature der goßen DBs:
+			Transactions
+			Eigene Spracherweiterung
+			Skalierung der Größe der Datenbank und der Server
+			Methoden der Datensicherung
+		IBM - Informix, DB2
+		Oracle
+		Microsoft - MSSQL
+		Postgres
+
+		Kleine DB:
+			Microsoft Access
+			Mysql
+			Sqlite
+
+		Typen
+			Relationale Datenorgatinsation
+				Tabelle hat einen eindeutigen Schlüssel (PK), der jede Zeile der Tabelle eindeutig kennzeichnet. Eine andere Tabelle kann zu dieser über den PK in eine Beziehung gesetzt werden.
+
+			Objektorientierte DBs:
+				Es werden Objekte mit Eigenschaften und Daten verwaltet. Es gibt eine baumartige Hierarchie mit Vererbung.
+				DB40, ZODB
+
+			Dokumentenorientierte Datenbank:
+				Die Daten werden als Dokumente, versehen mit Attributen, gespeichert.
+				MongoDB, CouchDB, Lotus Notes
+
+Postgres
+	Vorteile:
+		- große Community, die am stärksten wachsende DB
+		- Opensource
+		- hohe Zuverlässigkeit
+		- Gute Performance
+		- viele Features
+		- seit 1987
+
+1) sudo vim /etc/apt/sources.list.d/pgdg.list
+	einfügen:
+		deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main
+2) sudo apt-get install wget ca-certificates
+3) wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+4) sudo apt-get update
+5) sudo apt-get install postgresql-9.5
+6) service postgresql status
+
+7) Konsole starten(Zugriff zur DB):
+sudo -u postgres psql postgres
+	8) Anlegen eines neuen Benutzers: (bei mir aslan/aslan)
+	CREATE USER theo WITH SUPERUSER ENCRYPTED PASSWORD 'password';
+	9) Neue Datenbank anlegen:
+	CREATE DATABASE aslan OWNER aslan;
+	10) \q (verlässt die Konsole)
+
+11) psql (loggt sich ein)
+12) CREATE DATABASE g16;
+13) \c g16
+14) CREATE TABLE customers(id SERIAL PRIMARY KEY, first_name VARCHAR(50), last_name VARCHAR(50), address VARCHAR(20), zip CHAR(5), city VARCHAR(30), gender CHAR(1), email VARCHAR(30));
+15) INSERT INTO customers VALUES ( 1, 'Theo', 'Sommer', 'Jungfernstieg', 21044, 'Hamburg', 'm', 'theo@gmx.de');
+16) INSERT INTO customers VALUES ( 2, 'Valid', 'Aslan', 'Winsener', 29614, 'Soltau', 'm', 'valid.aslan@gmx.de');
+
+17) cd /var/www/html
+18) sudo apt-get install php-pgsql
+19) sudo vim index.php:
+<html>
+<head></head>
+<body>
+        <?php
+                $dbconnect = pg_conect("host=localhost dbname=g16 user=aslan password=aslan");
+                $query = "SELECT * FROM customers";
+                $result = pg_query($query);
+                var_dump($result);
+        ?>
+</body>
+</html>
+
+
+
+
+1. Datenbank g16 anlegen
+2. Dort Tabelle customers anlegen, mit den Spalten: id SERIAL  PRIMARY KEY, first_name VARCHAR(50), last_name VARCHAR(50), address VARCHAR(20), zip CHAR(5), city VARCHAR(30), gender CHAR(1), email: VARCHAR(30)
+3. Füllen Sie Tabelle mit 2 Datensätzen.
+
+1) psql    #loggt sich in psql ein
+2) \l      #zeigt alle datenbanken an
+3) \c g16  #loggt sich in die g16 datenbank ein
+4) \dt     #zeigt alle Tabellen an z.B. customers
+5) hier kann man nun noch Befehle eingeben, z.B. SELECT * FROM customers;
+6) \q hier verlässt man die Datenbnk und die Tabelle
+
+House:
+1) ssh aslan@172.16.161.143
+(https://gorails.com/setup/ubuntu/16.04)
+2) sudo apt-get update
+3) sudo apt-get install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev nodejs
+4) 
+cd
+git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+exec $SHELL
+
+git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
+exec $SHELL
+
+rbenv install 2.4.0
+rbenv global 2.4.0
+ruby -v
+5) gem install bundler
+6) gem install faker
+7) 
+sudo apt-get install libpq-dev
+gem install pg
+8)
+scp KuA/Aufgaben/loadscript.rb aslan@172.16.161.143:/home/aslan
+
+Tricks:
+1)	Exportieren der psql Tabelle in eine csv datei
+in psql:
+\! mkdir ~/dumps
+\copy customers to ~dumps/customers.csv
+2)	Erstellt aus der CSV Datei eine Datei um die Tabelle wiederherzustellen
+in bash:
+pg_dump -c g16 > dumps/customers2.csv
+less ~/dumps/customers2.csv
+3)	Wiederreinladen der Datei
+psql g16 < dumps/customers2.csv
